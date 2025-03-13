@@ -1,7 +1,7 @@
 export const ENDPOINTS = {
     GET: {
         COUNTRIES: 'countries',
-        LEAGUES: 'leagues?country=england',
+        LEAGUES: 'leagues',
         TEAMS: 'teams',
         TEAMS_STATISTICS: 'teams/statistics',
         VENUES: 'venues',

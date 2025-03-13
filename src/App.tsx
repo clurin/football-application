@@ -1,17 +1,17 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import LeaguesPage from './features/Leagues/LeaguesPage'
-import Countries from './features/Countries/components/Countries'
+import CountriesPage from './features/Countries/CountriesPage'
+import Teams from './features/Teams/components/Teams'
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        {/* <Route path='/' element={<LeaguesPage />} /> */}
-        {/* <Route path='/' element={<Countries />} /> */}
+        <Route path='/' element={<CountriesPage />} />
+        <Route path='/leagues' element={<LeaguesPage />} />
+        <Route path='/teams' element={<Teams />} />
       </Routes>
-      <Countries />
-      <LeaguesPage />
     </div>
   )
 }

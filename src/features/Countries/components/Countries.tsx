@@ -2,18 +2,22 @@ import React, { useState } from 'react'
 import { useGetCountriesQuery } from '../countriesApi'
 import { CircleLoader } from 'react-spinners'
 import style from './CountriesStyle.module.css'
+import { useAppDispatch } from '../../../app/store'
+import { setCountry } from '../setCountrySlice'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {}
 
 const Countries = (props: Props) => {
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+
     const { data, isLoading } = useGetCountriesQuery(null)
     const [currentPage, setCurrentPage] = useState(1)
     const countriesPerPage = 12
     const totalCountries = data?.response || []
     const totalPages = Math.ceil(totalCountries.length / countriesPerPage)
     const currentCountries = totalCountries.slice((currentPage - 1) * countriesPerPage, currentPage * countriesPerPage)
-
-
     const handleNextPage = () => {
         if (currentPage < totalPages) setCurrentPage(currentPage + 1)
     }
@@ -22,7 +26,10 @@ const Countries = (props: Props) => {
         if (currentPage > 1) setCurrentPage(currentPage - 1)
     }
 
-    console.log(currentCountries)
+    const setCountryFunction = (name: string) => {
+        dispatch(setCountry(name))
+        navigate('/leagues')
+    }
 
     if (isLoading) {
         return (
@@ -33,12 +40,15 @@ const Countries = (props: Props) => {
         )
     }
     return (
-        <div className={style.mainContainer}>
+        <div className={style.mainContainer} >
             <h1>Countries</h1>
             <div className={style.countriesCountainer}>
                 {currentCountries?.map((item) => (
                     <div className={style.container} key={item.code}>
-                        <img src={item.flag} alt={item.name} />
+                        <img
+                            src={item.flag}
+                            alt={item.name}
+                            onClick={() => setCountryFunction(item.name)} />
                         <h2>{item.name}</h2>
                     </div>
                 ))}
