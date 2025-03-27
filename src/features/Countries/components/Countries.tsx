@@ -44,11 +44,13 @@ const Countries = (props: Props) => {
             <h1>Countries</h1>
             <div className={style.countriesCountainer}>
                 {currentCountries?.map((item) => (
-                    <div className={style.container} key={item.code}>
+                    <div className={style.container}
+                        key={item.code}
+                        onClick={() => setCountryFunction(item.name)}>
                         <img
                             src={item.flag}
                             alt={item.name}
-                            onClick={() => setCountryFunction(item.name)} />
+                        />
                         <h2>{item.name}</h2>
                     </div>
                 ))}

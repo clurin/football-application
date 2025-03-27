@@ -3,15 +3,15 @@ import { CircleLoader } from 'react-spinners'
 import style from './TeamsStyle.module.css'
 import { useAppDispatch, useAppSelector } from '../../../app/store'
 import { useNavigate } from 'react-router-dom'
-// import { teamSelector } from '../../teams/setTeamSlice'
 import { useGetTeamsQuery } from '../teamsApi'
 import { leagueSelector } from '../../Leagues/setLeagueSlice'
+import { setTeam } from '../setTeamSlice'
 
 type Props = {}
 
 const Teams = (props: Props) => {
-    // const dispatch = useAppDispatch()
-    // const navigate = useNavigate()
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
     const id: number = useAppSelector(leagueSelector)
     const { data, isLoading } = useGetTeamsQuery(id)
@@ -22,10 +22,10 @@ const Teams = (props: Props) => {
     const totalPages = Math.ceil(totalTeams.length / TeamsPerPage)
     const currentTeams = totalTeams.slice((currentPage - 1) * TeamsPerPage, currentPage * TeamsPerPage)
 
-    // const setTeamFunction = (id: number) => {
-    //     dispatch((id))
-    //     navigate('/teams')
-    // }
+    const setTeamFunction = (team: number) => {
+        dispatch(setTeam(team))
+        navigate('/players')
+    }
 
     const handleNextPage = () => {
         if (currentPage < totalPages) setCurrentPage(currentPage + 1)
@@ -48,11 +48,13 @@ const Teams = (props: Props) => {
             <h1>Football Teams</h1>
             <div className={style.box}>
                 {currentTeams.map(item => (
-                    <div className={style.container} key={item.team.id}>
+                    <div className={style.container}
+                        key={item.team.id}
+                        onClick={() => setTeamFunction(item.team.id)}
+                    >
                         <img
                             src={item.team.logo}
                             alt={item.team.name}
-                        // onClick={() => setTeamFunction(item.team.id)}
                         />
                         <h2>{item.team.name}</h2>
                     </div>

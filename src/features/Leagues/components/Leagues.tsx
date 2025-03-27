@@ -13,8 +13,8 @@ const Leagues = (props: Props) => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const country = useAppSelector(countrySelector)
-    const { data, isLoading } = useGetLeaguesQuery(country)
+    const country: string = useAppSelector(countrySelector)
+    const { data, isLoading } = useGetLeaguesQuery(country) //! country взять из url, а не из State
 
     const [currentPage, setCurrentPage] = useState(1)
     const leaguesPerPage = 12
@@ -36,23 +36,20 @@ const Leagues = (props: Props) => {
     }
 
     if (isLoading) {
-        return (
-            <div className={style.loader}>
-                <CircleLoader size={100} color='#00ff40' />
-                <p className={style.loadingText}>Loading...</p>
-            </div>
-        )
+
     }
     return (
         <div className={style.mainContainer}>
             <h1>Football Leagues</h1>
             <div className={style.box}>
                 {currentLeagues.map(item => (
-                    <div className={style.container} key={item.league.id}>
+                    <div onClick={() => setLeagueFunction(item.league.id)}
+                        className={style.container}
+                        key={item.league.id}>
                         <img
                             src={item.league.logo}
                             alt={item.league.name}
-                            onClick={() => setLeagueFunction(item.league.id)}
+
                         />
                         <h2>{item.league.name}</h2>
                     </div>

@@ -1,7 +1,7 @@
-import { api } from "../../app/api";
-import { ENDPOINTS } from "../../app/endpoints";
-import { key } from "../../app/key";
-import { CountriesApiResponse } from "./models/Countries";
+import {api} from "../../app/api";
+import {ENDPOINTS} from "../../app/endpoints";
+import {key} from "../../app/key";
+import {CountriesApiResponse} from "./models/Countries";
 
 export const countriesApi = api.injectEndpoints({
     endpoints: (build) => ({
@@ -17,4 +17,4 @@ export const countriesApi = api.injectEndpoints({
     })
 })
 
-export const { useGetCountriesQuery } = countriesApi
+export const {useGetCountriesQuery} = countriesApi
