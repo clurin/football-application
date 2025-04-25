@@ -1,0 +1,49 @@
+.mainContainer {
+  background-color: #ffffff;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  font-size: 1.2rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.avatar {
+  width: 30%;
+  height: 30%;
+}
+
+.statsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.statsTable td {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+.tableTitle {
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+
+  .playerInfo {
+    flex: 1;
+  }
+
+  .statsTable {
+    flex: 1;
+  }
+}

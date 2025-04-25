@@ -3,16 +3,10 @@ import { api } from './api'
 import { TypedUseSelectorHook } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import setCountrySlice from '../features/Countries/setCountrySlice';
-import setLeagueSlice from '../features/Leagues/setLeagueSlice'
-import setTeamSlice from '../features/Teams/setTeamSlice'
-import modalLoaderSlice from '../side components/Loader/ModalLoaderSlice'
+import modalLoaderSlice from '../side components/ModalLoader/modalLoaderSlice'
 
 export const store = configureStore({
     reducer: {
-        setCountrySlice: setCountrySlice,
-        setLeagueSlice: setLeagueSlice,
-        setTeamSlice: setTeamSlice,
         modalLoaderSlice: modalLoaderSlice,
         [api.reducerPath]: api.reducer,
     },

@@ -1,0 +1,86 @@
+.combinedTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.combinedTable th,
+.combinedTable td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.teamHeader {
+    cursor: pointer;
+    background-color: #f5f5f5;
+    transition: background-color 0.2s;
+    min-width: 200px;
+}
+
+.teamHeader:hover {
+    background-color: #e0e0e0;
+}
+
+.teamLogo {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.teamName {
+    vertical-align: middle;
+    font-size: 1.1em;
+}
+
+.statType {
+    font-weight: bold;
+    background-color: #f8f9fa;
+    text-align: left;
+}
+
+.statValue {
+    font-weight: 500;
+    color: #ffffff;
+}
+
+@media (max-width: 400px) {
+    .combinedTable {
+        font-size: 1rem;
+    }
+
+    .teamHeader {
+        min-width: 120px;
+        padding: 5px !important;
+    }
+
+    .teamLogo {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+    }
+
+    .teamName {
+        font-size: 0.9em;
+        display: inline-block;
+        max-width: 80px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .statType {
+        font-size: 1em;
+        padding: 7px !important;
+    }
+
+    .statValue {
+        font-size: 1em;
+        padding: 4px 6px !important;
+    }
+
+    .tableContainer {
+        overflow-x: auto;
+    }
+}

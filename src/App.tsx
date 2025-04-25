@@ -1,26 +1,24 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import LeaguesPage from './features/Leagues/LeaguesPage'
-import CountriesPage from './features/Countries/CountriesPage'
 import TeamsPage from './features/Teams/TeamsPage'
 import PlayersPage from './features/Players/PlayersPage'
-import Loader from './side components/Loader/ModalLoader'
-import { useAppSelector } from './app/store'
-import { modalLoaderSelector } from './side components/Loader/ModalLoaderSlice'
+import Menu from './side components/Menu/Menu'
+import MainPage from './MainPage'
+import MatchPage from './features/Match/MatchPage'
+import PlayerStats from './features/Players/components/PlayerStats'
 
 function App() {
 
-    const isLoading: boolean = useAppSelector(modalLoaderSelector)
-
     return (
         <div className="App">
+            <Menu />
             <Routes>
-                <Route path='/' element={<CountriesPage />} />
-                <Route path='/leagues' element={<LeaguesPage />} />
-                <Route path='/teams' element={<TeamsPage />} />
-                <Route path='/players' element={<PlayersPage />} />
+                <Route path='/' element={<MainPage />} />
+                <Route path='/teams/:league_id' element={<TeamsPage />} />
+                <Route path='/players/:team_id' element={<PlayersPage />} />
+                <Route path='/match/:id' element={<MatchPage />} />
+                <Route path='/player/stats/id/:player_id' element={<PlayerStats />} />
             </Routes>
-            {isLoading && <Loader />}
         </div>
     )
 }

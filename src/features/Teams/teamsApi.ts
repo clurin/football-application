@@ -7,7 +7,7 @@ export const teamsApi = api.injectEndpoints({
     endpoints: (build) => ({
         getTeams: build.query<TeamsApiResponse, number>({
             query: (league_id) => ({
-                url: `${ENDPOINTS.GET.TEAMS}?league=${league_id}&season=2021`,
+                url: `${ENDPOINTS.GET.TEAMS}?league=${league_id}&season=2023`,
                 headers: {
                     "x-rapidapi-host": "v3.football.api-sports.io",
                     "x-rapidapi-key": key

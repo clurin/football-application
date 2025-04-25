@@ -1,1 +1,1 @@
-export const key: string = "b95205e11feee730d5250c76bd108f1c"
+export const key = process.env.REACT_APP_API_KEY

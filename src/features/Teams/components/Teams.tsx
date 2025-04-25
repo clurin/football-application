@@ -1,53 +1,30 @@
-import React, { useState } from 'react'
-import { CircleLoader } from 'react-spinners'
 import style from './TeamsStyle.module.css'
-import { useAppDispatch, useAppSelector } from '../../../app/store'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useGetTeamsQuery } from '../teamsApi'
-import { leagueSelector } from '../../Leagues/setLeagueSlice'
-import { setTeam } from '../setTeamSlice'
+import ModalLoader from '../../../side components/ModalLoader/ModalLoader'
 
 type Props = {}
 
 const Teams = (props: Props) => {
-    const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const id: number = useAppSelector(leagueSelector)
-    const { data, isLoading } = useGetTeamsQuery(id)
+    const { league_id } = useParams<{ league_id: string }>();
+    const { data, isLoading } = useGetTeamsQuery(Number(league_id) || 0);
 
-    const [currentPage, setCurrentPage] = useState(1)
-    const TeamsPerPage = 12
-    const totalTeams = data?.response || []
-    const totalPages = Math.ceil(totalTeams.length / TeamsPerPage)
-    const currentTeams = totalTeams.slice((currentPage - 1) * TeamsPerPage, currentPage * TeamsPerPage)
-
-    const setTeamFunction = (team: number) => {
-        dispatch(setTeam(team))
-        navigate('/players')
-    }
-
-    const handleNextPage = () => {
-        if (currentPage < totalPages) setCurrentPage(currentPage + 1)
-    }
-
-    const handlePrevPage = () => {
-        if (currentPage > 1) setCurrentPage(currentPage - 1)
+    const setTeamFunction = (team_id: number) => {
+        navigate(`/players/${team_id}`)
     }
 
     if (isLoading) {
         return (
-            <div className={style.loader}>
-                <CircleLoader size={100} color='#00ff40' />
-                <p className={style.loadingText}>Loading...</p>
-            </div>
+            <ModalLoader />
         )
     }
     return (
         <div className={style.mainContainer}>
             <h1>Football Teams</h1>
             <div className={style.box}>
-                {currentTeams.map(item => (
+                {data?.response.map(item => (
                     <div className={style.container}
                         key={item.team.id}
                         onClick={() => setTeamFunction(item.team.id)}
@@ -59,16 +36,6 @@ const Teams = (props: Props) => {
                         <h2>{item.team.name}</h2>
                     </div>
                 ))}
-            </div>
-
-            <div className={style.pagination}>
-                <button onClick={handlePrevPage} disabled={currentPage === 1}>
-                    Previous
-                </button>
-                <p>Page {currentPage} of {totalPages}</p>
-                <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-                    Next
-                </button>
             </div>
         </div>
     )
